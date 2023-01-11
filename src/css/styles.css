@@ -1,3 +1,29 @@
+@import '~js-datepicker/dist/datepicker.min.css';
+
+* {
+  font-family: 'Catamaran', sans-serif;
+  text-align: center;
+  /* display: flex; */
+}
+
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  background: lightblue;
+}
+
+img {
+  max-width: 10%;
+  height: auto;
+  /* align-self: flex-end; */
+}
+
+header {
+  background-color: white;
+  text-align: center;
+  font-size: 3em;
+  font-weight: bold;
+  border: 3px black solid;
+}
+
+h2, h3 {
+  font-size: large;
 }
