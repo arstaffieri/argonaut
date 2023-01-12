@@ -5,12 +5,35 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Webpack Starter Kit</title>
+  <link rel="stylesheet" href="datepicker.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100&display=swap" rel="stylesheet">
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
+  <header>Argonaut Excursions
+    <img src="./images/argonaut.png" alt="argonaut logo">
+  </header>
+  <article>
+    <h1>My Dashboard</h1>
+    <h2>User, you've spent $<span>0</span> with us so far this year.</h2>
+    <h3>Book your next trip now!</h3>
+    <section>When?
+      <label for="start-date">Trip Start:</label>
+      <input type="date" id="start-date" min="2000-1-1">
+      <label for="end-date">Trip End:</label>
+      <input type="date" id="end-date" min="2000-1-1">
+    </section>
+    <section>Where?
+      <input type="text" id="where">
+    </section>
+    <section>How Many?
+      <input type="number" id="number" min="1" max="100">
+    </section>
+    <section>Estimated Trip Cost: $<span></span>.</section>
+    <button>Book This Trip!</button>
+  </article>
   
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
-
+  <script src="datepicker.min.js"></script>
 </body>
 </html>
