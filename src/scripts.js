@@ -1,13 +1,146 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
+/* Imports */
+import './css/styles.css'
+import Traveler from './traveler'
+import Trip from './trips'
+import { getDestinationData, getSingleTravelerData, getTripData, postNewTrip } from './apiCalls'
 
-// An example of how you tell webpack to use a CSS (SCSS) file
-import './css/styles.css';
+/* Query Selectors */
+const navGreeting = document.querySelector('#nav-greeting-name')
+const pastTrips = document.querySelector('#past-trips')
+const pendingTrips = document.querySelector('#pending-trips')
+const upcomingTrips = document.querySelector('#upcoming-trips')
+const yearlyTotal = document.querySelector('#yearly-total')
+const newTripDate = document.querySelector('#trip-date-input')
+const newTripTravelers = document.querySelector('#trip-travelers-input')
+const newTripDuration = document.querySelector('#trip-duration-input')
+const newTripDestination = document.querySelector('#trip-destination-input')
+const newTripTotal = document.querySelector('#new-trip-total')
+const submitNewTripButton = document.querySelector('#new-trip-submit')
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/argonaut.png'
-// import datepicker from 'js-datepicker'
+/* Instances */
+let destinationData, travelerData, tripData
+const travelerID = 3 // need to convert when get to iteration 4 (log in page)
 
+/* apiCalls */
+const loadAPIData = () => {
+    return Promise.all([getDestinationData(), getSingleTravelerData(travelerID), getTripData()])
+    .then(responses => {
+        destinationData = responses[0].destinations
+        
+        travelerData = new Traveler(responses[1])
+        
+        tripData = responses[2].trips
+            .filter(trip => trip.userID === travelerID)
+            .map(trip => new Trip(trip))
+        tripData.forEach(trip => trip.storeDestination(destinationData))
+    })
+    .then(() => {
+        displayTravelerGreeting()
+        displayYearlyTripTotal()
+        displayTrips()
+        generateDestinationDropdown()
+    })
+}
 
-console.log('This is the JavaScript entry file - your code begins here.');
-const picker = datepicker(selector, options)
+/* Functions */ // when convert to ES6/arrow functions, function must be declared before invocation
+function displayTravelerGreeting() {
+    navGreeting.innerHTML = `Hello, ${travelerData.returnFirstName()}!`
+}
+
+function handleTrips(card, trips) {
+    if (!trips.length) {
+        card.innerHTML = 'No trips found!'
+    } else {
+        card.innerHTML = trips.map(trip => {
+            return `
+                <section class="info-card">
+                    <p class="trip-destination">Destination: ${trip.destination.name}</p>
+                    <p class="trip-date">Date: ${trip.date}</p>
+                    <p class="trip-travelers">Travelers: ${trip.travelers} Adult(s)</p>
+                    <p class="trip-duration">Duration: ${trip.duration} Day(s)</p>
+                </section>
+            `
+        }).join('')
+    }
+}
+
+function displayTrips() {
+    const sortedTrips = travelerData.sortTrips(tripData, "2020/12/31")
+    handleTrips(pastTrips, sortedTrips.past)
+    handleTrips(pendingTrips, sortedTrips.pending)
+    handleTrips(upcomingTrips, sortedTrips.upcoming)
+}
+
+function displayYearlyTripTotal() {
+    yearlyTotal.innerHTML = `Total Spent This Year: $${travelerData.returnYearlyTripCost(tripData, 2020)}`
+}
+
+function generateDestinationDropdown() {
+    newTripDestination.innerHTML += destinationData.map(destination => {
+        return `<option value="${destination.id}">${destination.destination}</option>`
+    }).join('')
+}
+
+function createNewTrip() {
+    const tripDate = newTripDate.value.replaceAll('-', '/')
+    const tripTravelers = parseInt(newTripTravelers.value)
+    const tripDuration = parseInt(newTripDuration.value)
+    const tripDestination = parseInt(newTripDestination.value)
+    return {
+        id: Date.now(),
+        userID: travelerID,
+        destinationID: tripDestination,
+        travelers: tripTravelers,
+        date: tripDate,
+        duration: tripDuration,
+        status: "pending",
+        suggestedActivities: []
+    }
+}
+
+function onSubmit(e) {
+    e.preventDefault()
+    const newTripInfo = createNewTrip()
+    return Promise.all([postNewTrip(newTripInfo)])
+    .then(response => {
+        const newTrip = new Trip(response[0].newTrip)
+        newTrip.storeDestination(destinationData)
+        tripData.push(newTrip)
+        displayTrips()
+        newTripDate.value = ''
+        newTripTravelers.value = ''
+        newTripDuration.value = ''
+        newTripDestination.value = '0'
+        newTripTotal.innerText = '0.00'
+        checkSubmitEligibility()
+    })
+}
+
+function renderNewTripPrice() {
+    const newTrip = new Trip(createNewTrip())
+    newTrip.storeDestination(destinationData)
+    if (newTrip.travelers && newTrip.duration && newTrip.destinationID) {
+        newTripTotal.innerText = newTrip.calculateTripCost().toFixed(2)
+    } else {
+        newTripTotal.innerText = '0.00'
+    }
+
+    checkSubmitEligibility()
+}
+
+function checkSubmitEligibility() {
+    if (newTripDate.value && newTripTravelers.value && newTripDuration.value && parseInt(newTripDestination.value)) {
+        submitNewTripButton.disabled = false
+        submitNewTripButton.classList.remove('disable-button')
+    } else {
+        submitNewTripButton.disabled = true
+        submitNewTripButton.classList.add('disable-button')
+    }
+}
+
+/* Event Listeners */
+window.addEventListener('load', loadAPIData)
+submitNewTripButton.addEventListener('click', onSubmit)
+newTripDestination.addEventListener('change', renderNewTripPrice)
+newTripDuration.addEventListener('input', renderNewTripPrice)
+newTripTravelers.addEventListener('input', renderNewTripPrice)

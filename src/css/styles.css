@@ -1,35 +1,216 @@
-@import '~js-datepicker/dist/datepicker.min.css';
-
-* {
-  font-family: 'Catamaran', sans-serif;
-  text-align: center;
-  /* display: flex; */
-}
-
+/* Global Styling */
 body {
-  background: lightblue;
+  background-color: rgb(24, 109, 140);
+  font-family: 'Catamaran' sans-serif;
+  margin: 0px;
 }
 
-img {
-  max-width: 10%;
-  height: auto;
-  /* align-self: flex-end; */
+/* Log-In View */
+/* .user-screen {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
+  margin: 0px;
 }
 
-header {
-  background-color: white;
-  text-align: center;
-  font-size: 3em;
-  font-weight: bold;
-  border: 3px black solid;
+.page-title {
+  font-size: 65px;
+  font-style: italic;
+  font-weight: bolder;
+  padding: 20px;
 }
 
-h2, h3 {
-  font-size: large;
+.log-in {
+  height: 100px;
+  width: 300px;
 }
 
-.trips-list {
+.user {
   display: flex;
   justify-content: space-between;
+  margin-top: 5px;
+}
+
+.login-button {
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+}
+
+.disable-login-button {
+  cursor: not-allowed
+}
+
+.login-error {
+  font-size: 12px;
+  font-style: italic;
+  padding: 10px;
+} */
+
+/* Main View */
+/* Navigation */
+.nav-menu {
+  align-items: center;
+  background-color: #343D5B;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-users {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-greeting {
+  font-size: 25px;
+}
+
+.button-design {
+  background-color: #0adef2;
+  border: 1px solid white;
+  border-radius: 8%;
+  color: white;
+  cursor: not-allowed;
+  font-size: 10px;
+  height: 20px;
+  margin-left: 10px;
+  padding: 3px;
+  visibility: hidden;
+  width: 100px;
+}
+
+/* Main */
+.main-content {
+  background-color: rgb(72, 95, 226);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100vh;
+}
+
+/* Trip Cards */
+.content {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.long-card {
+  background-color: #1f39b8;
+  display: flex;
+  justify-content: space-evenly;
+  height: 150px;
+  width: 900px;
+}
+
+.main-new-trip {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.new-trip-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 10px;
+  width: 400px;
+}
+
+.new-info {
+  color: white;
+  width: 175px;
+}
+
+.input-box {
+  width: 175px;
+}
+
+.submit-box {
+  align-items: center;
+}
+
+.total-due {
+  color: white;
+  font-weight: bold;
   text-decoration: underline;
+}
+
+.submit-button-design {
+  background-color: #6a68d9;
+  border: 1px solid white;
+  border-radius: 8%;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+  padding: 3px;
+  width: 100px;
+}
+
+.disable-button {
+  background-color: #9392d8;
+  color: #b4afaf;
+  cursor: default;
+}
+
+/* Trip Footer */
+/* .bottom-card {
+  align-items: center;
+  display: flex;
+} */
+
+/* Trip Cards */
+.card-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card {
+  align-items: center;
+  border-radius: 20px;
+  background-color: #0f0962;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 400px;
+  width: 275px;
+}
+
+.card-wrap {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.card-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.card-text {
+  color: white;
+  font-size: 20px;
+  text-decoration: underline;
+  text-align: left;
+}
+
+.info-card {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  justify-content: space-between;
+  margin: 8px 0px;
+  padding: 4px;
+  width: 225px;
+}
+
+.hidden {
+  display: none;
 }
