@@ -6,7 +6,7 @@ body {
 }
 
 /* Log-In View */
-/* .user-screen {
+.user-screen {
   align-items: center;
   color: white;
   display: flex;
@@ -48,7 +48,7 @@ body {
   font-size: 12px;
   font-style: italic;
   padding: 10px;
-} */
+}
 
 /* Main View */
 /* Navigation */
@@ -156,12 +156,6 @@ body {
   color: #b4afaf;
   cursor: default;
 }
-
-/* Trip Footer */
-/* .bottom-card {
-  align-items: center;
-  display: flex;
-} */
 
 /* Trip Cards */
 .card-container {
