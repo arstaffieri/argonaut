@@ -1,44 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
-  <link rel="stylesheet" href="datepicker.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100&display=swap" rel="stylesheet">
-</head>
-<body>
-  <header>Argonaut Excursions
-    <img src="./images/argonaut.png" alt="argonaut logo">
-  </header>
-  <article>
-    <h1>My Dashboard</h1>
-    <h2>User, you've spent $<span>0</span> with us so far this year.</h2>
-    <h3>Book your next trip now!</h3>
-    <section>When?
-      <label for="start-date">Trip Start:</label>
-      <input type="date" id="start-date" min="2000-1-1">
-      <label for="end-date">Trip End:</label>
-      <input type="date" id="end-date" min="2000-1-1">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argonaut Excursions</title>
+  </head>
+  <body>
+    <!-- <article class="user-screen" id="login">
+      <p class="page-title">Argonaut Excursions</p>
+      <form class="log-in">
+        <label class="user">Username: <input class="username-input" type="text" name="username" id="user-name" required/></label>
+        <label class="user">Password: <input class="password-input" type="text" name="password" id="user-password" required/></label>
+        <button class="login-button disable-login-button" id="user-submit" disabled>Log In</button>
+      </form>
+      <p class="login-error" id="user-error"></p>
+    </article> -->
+    <nav class="nav-menu" id="nav-main">
+      <h1>Argonaut Excursions</h1>
+      <p>Today is December 31st, 2020 </p>
+      <p class="yearly-total" id="yearly-total">Total Spent This Year: $$$</p>
+      <section class="nav-users">
+        <p class="nav-greeting" id="nav-greeting-name">Welcome, firstName</p>
+        <button class="button-design disable-button" disabled>Log Out</button>
+      </section>
+    </nav>
+    <section class="main-content " id="main">
+      <article class="content">
+        <form class="main-new-trip long-card">
+          <section class="new-trip-box">
+            <label class="new-info" for="trip-date-input">When?</label>
+            <label class="new-info" for="trip-travelers-input">How Many?</label>
+            <label class="new-info" for="trip-duration-input">How Long?</label>
+            <label class="new-info" for="trip-destination-input">Where?</label>
+          </section>
+          <section class="new-trip-box">
+            <input class="input-box" type="date" name="trip-date" id="trip-date-input" tabindex="0"/>
+            <input class="input-box" type="number" name="trip-travelers" id="trip-travelers-input" placeholder="1" required/>
+            <input class="input-box" type="number" name="trip-duration" id="trip-duration-input" placeholder="2" required/>
+            <select class="input-box" type="text" name="trip-destination" id="trip-destination-input">
+              <option value="0" disabled selected>Select Destination</option>
+            </select>
+          </section>
+          <section class="new-trip-box submit-box">
+            <p class="total-due">Total Cost: $<span id="new-trip-total">0.00</span></p>
+            <button class="submit-button-design disable-button" id="new-trip-submit" disabled>Submit</button>
+          </section>
+        </form>
+      </article>
+      <article class="card-container">
+        <article class="card">
+          <p class="card-text">Past Trips</p>
+          <section class="card-wrap" id="past-trips"></section>
+        </article>
+        <article class="card">
+          <p class="card-text">Pending Trips</p>
+          <section class="card-wrap" id="pending-trips"></section>
+        </article>
+        <article class="card">
+          <p class="card-text">Upcoming Trips</p>
+          <section class="card-wrap" id="upcoming-trips"></section>
+        </article>
+      </article>
     </section>
-    <section>Where?
-      <input type="text" id="where">
-    </section>
-    <section>How Many?
-      <input type="number" id="number" min="1" max="100">
-    </section>
-    <section>Estimated Trip Cost: $<span>0</span>.</section>
-    <button>Book This Trip!</button>
-    <section class="trips-list">
-      <p class="Upcoming">Upcoming Trips</p>
-      <p class="Pending">Pending Trips</p>
-      <p class="Past">Past Trips</p>
-    </section>
-  </article>
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
-  <script src="bundle.js"></script>
-  <script src="datepicker.min.js"></script>
-</body>
+    <script src="bundle.js"></script>
+  </body>
 </html>

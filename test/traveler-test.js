@@ -60,7 +60,7 @@ describe('Traveler', () => {
         // suggestedActivities: [ ]
         // }
     )
-    newTrip.storeDestination(destinationData)
+    // newTrip.storeDestination(destinationData)
 
   })
   it('Should be a function', function() {
@@ -84,15 +84,15 @@ describe('Traveler', () => {
     expect(traveler2.getFirstName()).to.equal('Tiffy')
     expect(traveler3.getFirstName()).to.equal('Laverna')
   })
-  // it('Should show the cost of trips a user has taken in a given year', function () {
-  //   console.log(newTrip)
-  //   const howMuch = traveler1.getUserTrips(tripData, 2019)
-  //   console.log(howMuch)
-  //   expect(howMuch).to.equal()
-  // })
+  it('Should show the cost of trips a user has taken in a given year', function () {
+    newTrip.storeDestination(destinationData)
+    console.log(newTrip.calculateTripCost())
+    const howMuch = traveler1.getUserTrips(tripData, 2019)
+    console.log(howMuch)
+    expect(howMuch).to.equal()
+  })
   it('Should be able to return sorted trips for a given user', function () {
     const allTrips = traveler1.sortTrips(tripData, '2022/06/29')
-    console.log(allTrips.upcoming)
     expect(allTrips.past).to.deep.equal(
       [
         {
