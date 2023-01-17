@@ -23,7 +23,7 @@ class Trip {
     calculateTripCost() {
         const lodging = this.destination.lodgingCost * this.duration
         const flight = this.destination.flightCost * this.travelers
-        return (lodging + flight) * 1.1
+        return ((lodging + flight) * 1.1).toFixed(2)
     }
 }
 
