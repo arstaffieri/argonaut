@@ -43,14 +43,18 @@ describe('Trip', () => {
         expect(anotherTrip.destination).to.deep.equal({
             id: 5,
             name: 'Madrid, Spain',
+            alt: "city with clear skys and a road in the day time",
             lodgingCost: 150,
-            flightCost: 650
+            flightCost: 650,
+            image: "https://images.unsplash.com/photo-1543785734-4b6e564642f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
           })
         expect(yetAnotherTrip.destination).to.deep.equal({
             id: 14,
             name: 'Marrakesh, Morocco',
+            alt: "people buying oranges and other fruit from a street vendor",
             lodgingCost: 70,
-            flightCost: 830
+            flightCost: 830,
+            image: "https://images.unsplash.com/photo-1517821362941-f7f753200fef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1952&q=80"
           })
     })
     it('Should calucalte the total cost of a trip with a travel agent fee of 10%', function () {

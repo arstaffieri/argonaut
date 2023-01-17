@@ -11,58 +11,17 @@ describe('Traveler', () => {
   let traveler1
   let traveler2
   let traveler3
-  let newTrip
+  let trips
 
   beforeEach(() => {
     traveler1 = new Traveler(people[1])
     traveler2 = new Traveler(people[4])
     traveler3 = new Traveler(people[5])
 
-    newTrip = new Trip(
-      {
-        id: 23,
-        userID: 4,
-        destinationID: 24,
-        travelers: 6,
-        date: "2019/01/02",
-        duration: 18,
-        status: "approved",
-        suggestedActivities: [ ]
-        },
-        // {
-        // id: 24,
-        // userID: 4,
-        // destinationID: 26,
-        // travelers: 5,
-        // date: "2019/11/15",
-        // duration: 7,
-        // status: "approved",
-        // suggestedActivities: [ ]
-        // },
-        // {
-        // id: 25,
-        // userID: 4,
-        // destinationID: 12,
-        // travelers: 6,
-        // date: "2019/10/26",
-        // duration: 9,
-        // status: "approved",
-        // suggestedActivities: [ ]
-        // },
-        // {
-        // id: 26,
-        // userID: 4,
-        // destinationID: 15,
-        // travelers: 3,
-        // date: "2019/12/10",
-        // duration: 9,
-        // status: "approved",
-        // suggestedActivities: [ ]
-        // }
-    )
-    // newTrip.storeDestination(destinationData)
-
+    trips = tripData.map(trip => new Trip(trip))
+    trips.forEach(trip => trip.storeDestination(destinationData))
   })
+
   it('Should be a function', function() {
     expect(Traveler).to.be.a('function');
   });
@@ -80,16 +39,9 @@ describe('Traveler', () => {
     expect(traveler2.travelerType).to.equal("thrill-seeker")
   })
   it('Should give the first name of the traveler', function () {
-    expect(traveler1.getFirstName()).to.equal('Rachael')
-    expect(traveler2.getFirstName()).to.equal('Tiffy')
-    expect(traveler3.getFirstName()).to.equal('Laverna')
-  })
-  it('Should show the cost of trips a user has taken in a given year', function () {
-    newTrip.storeDestination(destinationData)
-    console.log(newTrip.calculateTripCost())
-    const howMuch = traveler1.getUserTrips(tripData, 2019)
-    console.log(howMuch)
-    expect(howMuch).to.equal()
+    expect(traveler1.returnFirstName()).to.equal('Rachael')
+    expect(traveler2.returnFirstName()).to.equal('Tiffy')
+    expect(traveler3.returnFirstName()).to.equal('Laverna')
   })
   it('Should be able to return sorted trips for a given user', function () {
     const allTrips = traveler1.sortTrips(tripData, '2022/06/29')
